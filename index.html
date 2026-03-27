@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taqueria Los Compadres | Authentic Mexican Food · Sacramento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C8001A;
+  --red-dark:#9A0012;
+  --green:#0A5C1E;
+  --green-light:#0D7A28;
+  --white:#FFFFFF;
+  --cream:#FFF8F0;
+  --dark:#0A0205;
+  --card:#12050A;
+  --border:rgba(200,0,26,0.15);
+  --border2:rgba(255,255,255,0.07);
+  --muted:#6B3040;
+  --text:#F5E8EC;
+  --display:'Bebas Neue',sans-serif;
+  --serif:'Playfair Display',serif;
+  --body:'DM Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--text);font-family:var(--body);font-weight:300;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:80px;transition:all 0.4s}
+nav.scrolled{background:rgba(10,2,5,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo img{height:48px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.6))}
+.nav-links{display:flex;gap:36px;list-style:none;align-items:center}
+.nav-links a{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.6);transition:color 0.2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{background:var(--red)!important;color:#fff!important;padding:10px 24px;border-radius:2px;transition:all 0.2s!important}
+.nav-cta:hover{background:var(--red-dark)!important;transform:translateY(-1px)}
+.hamburger{display:none;cursor:pointer;flex-direction:column;gap:5px}
+.hamburger span{width:24px;height:2px;background:#fff;display:block}
+
+/* HERO */
+#hero{position:relative;height:100vh;min-height:700px;display:flex;align-items:center;justify-content:center;overflow:hidden;text-align:center}
+.hero-bg{position:absolute;inset:0;background-image:url('https://static.wixstatic.com/media/5887cf_69c2014ad2d94dd7acf39817eda081d7f000.jpg/v1/fill/w_1280,h_720,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5887cf_69c2014ad2d94dd7acf39817eda081d7f000.jpg');background-size:cover;background-position:center;transform:scale(1.06);animation:hzoom 20s ease-in-out infinite alternate}
+@keyframes hzoom{0%{transform:scale(1.06)}100%{transform:scale(1.13)}}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,2,5,0.72) 0%,rgba(10,2,5,0.5) 40%,rgba(10,2,5,0.88) 80%,rgba(10,2,5,1) 100%);z-index:1}
+.hero-content{position:relative;z-index:2;max-width:900px;padding:0 24px}
+.hero-logo{width:200px;margin:0 auto 24px;filter:drop-shadow(0 4px 20px rgba(0,0,0,0.8));animation:fadeUp 1s 0.1s both}
+.hero-eyebrow{font-family:var(--serif);font-size:18px;font-style:italic;color:rgba(255,255,255,0.65);margin-bottom:16px;letter-spacing:2px;animation:fadeUp 1s 0.3s both}
+.hero-title{font-family:var(--display);font-size:clamp(60px,10vw,130px);line-height:0.88;color:#fff;letter-spacing:4px;margin-bottom:12px;animation:fadeUp 1s 0.4s both;text-shadow:0 4px 30px rgba(0,0,0,0.8)}
+.hero-title .red{color:var(--red)}
+.hero-since{font-size:12px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:44px;animation:fadeUp 1s 0.55s both}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:fadeUp 1s 0.7s both}
+.btn-red{background:var(--red);color:#fff;padding:18px 48px;font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;border-radius:2px;transition:all 0.25s;display:inline-flex;align-items:center;gap:10px}
+.btn-red:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 12px 30px rgba(200,0,26,0.45)}
+.btn-green{background:var(--green);color:#fff;padding:18px 48px;font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;border-radius:2px;transition:all 0.25s}
+.btn-green:hover{background:var(--green-light);transform:translateY(-2px);box-shadow:0 12px 30px rgba(10,92,30,0.45)}
+.scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(200,0,26,0.4);animation:fadeUp 1s 1s both}
+.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,transparent,var(--red));animation:pulse 2s ease-in-out infinite}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
+
+/* STRIPE */
+.stripe{height:6px;background:linear-gradient(90deg,var(--red) 0%,var(--red) 33%,#fff 33%,#fff 66%,var(--green) 66%,var(--green) 100%)}
+
+/* STATS */
+.stats-bar{background:var(--card);border-bottom:1px solid var(--border);padding:20px 48px;display:flex;justify-content:center;gap:72px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-family:var(--display);font-size:36px;color:var(--red);letter-spacing:2px}
+.stat-lbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+/* COMMONS */
+section{padding:100px 48px}
+.container{max-width:1280px;margin:0 auto}
+.s-eyebrow{font-size:10px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+.s-title{font-family:var(--display);font-size:clamp(48px,6vw,80px);line-height:0.95;color:#fff;margin-bottom:16px;letter-spacing:3px}
+.s-desc{font-size:16px;color:var(--muted);line-height:1.7;max-width:560px}
+
+/* LOCATIONS */
+#locations{background:var(--dark)}
+.locations-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.loc-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:all 0.3s;cursor:pointer}
+.loc-card:hover{transform:translateY(-6px);border-color:rgba(200,0,26,0.4);box-shadow:0 24px 48px rgba(0,0,0,0.5)}
+.loc-img{width:100%;aspect-ratio:16/9;object-fit:cover;filter:saturate(0.8);transition:all 0.4s}
+.loc-card:hover .loc-img{filter:saturate(1.1)}
+.loc-body{padding:24px}
+.loc-num{font-family:var(--display);font-size:48px;color:rgba(200,0,26,0.1);line-height:1;margin-bottom:8px}
+.loc-name{font-family:var(--display);font-size:22px;color:#fff;letter-spacing:2px;margin-bottom:8px}
+.loc-card:hover .loc-name{color:var(--red)}
+.loc-addr{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:6px}
+.loc-phone{font-size:14px;color:rgba(255,255,255,0.6);margin-bottom:20px}
+.loc-phone a{color:rgba(255,255,255,0.6)}
+.loc-btns{display:flex;gap:10px}
+.loc-btn-order{flex:2;background:var(--red);color:#fff;padding:12px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center;transition:all 0.2s}
+.loc-btn-order:hover{background:var(--red-dark)}
+.loc-btn-call{flex:1;background:transparent;color:rgba(255,255,255,0.5);padding:12px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;border:1px solid var(--border2);transition:all 0.2s}
+.loc-btn-call:hover{border-color:var(--red);color:#fff}
+
+/* ===== MENU — CIRCULAR GRID ===== */
+#menu{background:#0E0307;padding:100px 48px}
+.menu-header{text-align:center;margin-bottom:64px}
+.menu-sub{font-family:var(--serif);font-size:20px;font-style:italic;color:rgba(255,255,255,0.5);margin-top:12px}
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:40px 32px;
+  max-width:1100px;
+  margin:0 auto
+}
+.menu-item{display:flex;flex-direction:column;align-items:center;gap:16px;cursor:pointer}
+.menu-circle-wrap{
+  position:relative;
+  width:100%;
+  padding-bottom:100%;
+  border-radius:50%;
+  overflow:hidden;
+  border:4px solid rgba(200,0,26,0.25);
+  box-shadow:0 8px 32px rgba(0,0,0,0.5);
+  transition:all 0.4s;
+  background:var(--card)
+}
+.menu-item:hover .menu-circle-wrap{
+  border-color:var(--red);
+  box-shadow:0 12px 40px rgba(200,0,26,0.35),0 0 0 2px var(--red)
+}
+.menu-circle-wrap img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform 0.5s
+}
+.menu-item:hover .menu-circle-wrap img{transform:scale(1.08)}
+.menu-item-name{
+  font-family:var(--display);
+  font-size:20px;
+  letter-spacing:2px;
+  color:#fff;
+  text-align:center;
+  transition:color 0.2s
+}
+.menu-item:hover .menu-item-name{color:var(--red)}
+.menu-item-btn{
+  display:inline-block;
+  padding:8px 22px;
+  border:1px solid var(--red);
+  border-radius:2px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:var(--red);
+  transition:all 0.2s
+}
+.menu-item:hover .menu-item-btn{
+  background:var(--red);
+  color:#fff
+}
+
+/* ABOUT */
+#about{background:var(--red);position:relative;overflow:hidden;padding:100px 48px}
+#about::before{content:'LOS COMPADRES';position:absolute;top:-20px;right:-10px;font-family:var(--display);font-size:130px;color:rgba(255,255,255,0.04);line-height:1;pointer-events:none;letter-spacing:5px}
+.about-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1}
+.about-img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;border:2px solid rgba(255,255,255,0.2)}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.15);border-radius:8px;overflow:hidden;margin-top:32px}
+.a-stat{background:rgba(0,0,0,0.2);padding:24px 20px;text-align:center}
+.a-stat-num{font-family:var(--display);font-size:40px;color:#fff;letter-spacing:2px;line-height:1;margin-bottom:6px}
+.a-stat-lbl{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.65)}
+
+/* HIRING */
+#hiring{background:var(--green);padding:80px 48px;position:relative;overflow:hidden}
+#hiring::before{content:'NOW HIRING';position:absolute;top:-10px;right:-10px;font-family:var(--display);font-size:150px;color:rgba(255,255,255,0.03);pointer-events:none;letter-spacing:5px}
+.hiring-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;position:relative;z-index:1}
+.hiring-form{background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:40px;backdrop-filter:blur(10px)}
+.hiring-form h3{font-family:var(--display);font-size:32px;color:#fff;letter-spacing:2px;margin-bottom:24px}
+.fg{margin-bottom:16px}
+.fg label{display:block;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px}
+.fg input,.fg textarea,.fg select{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:14px 16px;color:#fff;font-family:var(--body);font-size:14px;transition:border-color 0.2s;outline:none}
+.fg input:focus,.fg select:focus{border-color:#fff}
+.fg select option{background:#0A5C1E}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.btn-white-full{width:100%;background:#fff;color:var(--green);padding:16px;border:none;border-radius:6px;font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;margin-top:8px;transition:all 0.25s}
+.btn-white-full:hover{background:#f0f0f0;transform:translateY(-2px)}
+
+/* CONTACT */
+#contact{background:var(--dark)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+.ci{display:flex;gap:20px;align-items:flex-start;padding:22px 0;border-bottom:1px solid var(--border)}
+.ci:first-child{border-top:1px solid var(--border)}
+.ci-icon{width:44px;height:44px;flex-shrink:0;background:rgba(200,0,26,0.08);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.ci-title{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:4px;opacity:0.8}
+.ci-val{font-size:14px;color:#fff;line-height:1.7}
+.ci-val a{color:rgba(200,0,26,0.9)}
+.socials{display:flex;gap:12px;margin-top:32px}
+.social{width:44px;height:44px;background:var(--card);border:1px solid var(--border2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;transition:all 0.2s}
+.social:hover{border-color:var(--red);background:rgba(200,0,26,0.08);transform:translateY(-2px)}
+.contact-form-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:40px}
+.contact-form-box h3{font-family:var(--display);font-size:36px;color:#fff;letter-spacing:2px;margin-bottom:8px}
+.contact-form-box p{color:var(--muted);font-size:14px;margin-bottom:28px}
+.cfg{margin-bottom:16px}
+.cfg label{display:block;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(200,0,26,0.6);margin-bottom:8px}
+.cfg input,.cfg textarea{width:100%;background:var(--dark);border:1px solid var(--border2);border-radius:6px;padding:14px 16px;color:#fff;font-family:var(--body);font-size:14px;outline:none;transition:border-color 0.2s}
+.cfg input:focus,.cfg textarea:focus{border-color:var(--red)}
+.cfg textarea{resize:none;height:120px}
+
+/* FOOTER */
+footer{background:#060003;border-top:1px solid var(--border);padding:40px 48px}
+.footer-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px}
+.footer-logo img{height:44px;width:auto}
+.footer-center{text-align:center}
+.footer-tagline{font-family:var(--serif);font-style:italic;font-size:14px;color:rgba(255,255,255,0.35);margin-bottom:8px}
+.footer-links{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+.footer-links a{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.2s}
+.footer-links a:hover{color:#fff}
+.footer-copy{font-size:12px;color:var(--muted);text-align:right}
+
+.reveal{opacity:0;transform:translateY(36px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}.d3{transition-delay:0.3s}.d4{transition-delay:0.4s}
+
+/* ====== RESPONSIVE ====== */
+@media(max-width:1024px){
+  .menu-grid{grid-template-columns:repeat(3,1fr);gap:32px 24px}
+}
+
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;inset:0;top:80px;background:rgba(10,2,5,0.99);padding:40px 24px;gap:24px;z-index:99}
+  .nav-links.open a{font-size:20px;color:#fff!important}
+  section{padding:64px 20px}
+  #menu{padding:64px 20px}
+  #about,#hiring{padding:64px 20px}
+  .hero-btns{flex-direction:column;align-items:center}
+  .stats-bar{gap:24px;padding:16px 20px}
+
+  /* 2 columns on mobile — matching iPhone screenshot */
+  .menu-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:28px 20px;
+    max-width:100%
+  }
+  .menu-item-name{font-size:17px}
+  .menu-circle-wrap{border-width:3px}
+
+  .locations-grid{grid-template-columns:1fr;gap:16px}
+  .about-inner,.hiring-inner,.contact-grid{grid-template-columns:1fr;gap:48px}
+  .footer-inner{flex-direction:column;text-align:center}
+  .footer-copy{text-align:center}
+  .fr{grid-template-columns:1fr}
+}
+
+@media(max-width:400px){
+  .menu-grid{gap:20px 14px}
+  .menu-item-name{font-size:15px}
+  .menu-item-btn{font-size:9px;padding:6px 14px}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">
+    <img src="https://static.wixstatic.com/media/5887cf_730893d8e0364653af47ee9b4e68625c~mv2.png/v1/fill/w_338,h_122,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logo%20de%20los%20compadres.png" alt="Los Compadres">
+  </div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#locations">Locations</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#hiring">Now Hiring</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://taqloscompadres.hrpos.heartland.us/menu" target="_blank" class="nav-cta">Order Now</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <img class="hero-logo" src="https://static.wixstatic.com/media/5887cf_730893d8e0364653af47ee9b4e68625c~mv2.png/v1/fill/w_338,h_122,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logo%20de%20los%20compadres.png" alt="Los Compadres">
+    <div class="hero-eyebrow">Authentic Mexican Food</div>
+    <h1 class="hero-title">TAQUERIA<br><span class="red">LOS COMPADRES</span></h1>
+    <div class="hero-since">EST. 2010 · SACRAMENTO, CA · 3 LOCATIONS</div>
+    <div class="hero-btns">
+      <a href="https://taqloscompadres.hrpos.heartland.us/menu" target="_blank" class="btn-red">🌮 Order Online Now</a>
+      <a href="#menu" class="btn-green">View Our Menu</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div>Scroll</div>
+</section>
+
+<div class="stripe"></div>
+
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">Est. 2010</div><div class="stat-lbl">Serving Sacramento</div></div>
+  <div class="stat"><div class="stat-num">3</div><div class="stat-lbl">Locations</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-lbl">Authentic Mexican</div></div>
+  <div class="stat"><div class="stat-num">Catering</div><div class="stat-lbl">Available</div></div>
+</div>
+
+<!-- LOCATIONS -->
+<section id="locations">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:0">
+      <div class="s-eyebrow" style="text-align:center">Find Us</div>
+      <h2 class="s-title" style="text-align:center">3 LOCATIONS,<br>ONE <span style="color:var(--red)">EXPERIENCE</span></h2>
+      <p class="s-desc" style="text-align:center;margin:0 auto 0">Select your nearest location to order online</p>
+    </div>
+    <div class="locations-grid reveal d1">
+      <div class="loc-card">
+        <img class="loc-img" src="https://static.wixstatic.com/media/5887cf_3f7fcce3170e434086cd1998b968b614~mv2.png/v1/fill/w_600,h_338,al_c,q_85,enc_avif,quality_auto/5887cf_3f7fcce3170e434086cd1998b968b614~mv2.png" alt="Fair Oaks" onerror="this.style.background='#12050A';this.style.minHeight='200px'">
+        <div class="loc-body">
+          <div class="loc-num">01</div>
+          <div class="loc-name">FAIR OAKS BLVD</div>
+          <div class="loc-addr">2550 Fair Oaks Blvd<br>Sacramento, CA 95825</div>
+          <div class="loc-phone"><a href="tel:9164800977">(916) 480-0977</a></div>
+          <div class="loc-btns">
+            <a href="https://taqloscompadres.hrpos.heartland.us/menu" target="_blank" class="loc-btn-order">Order Online</a>
+            <a href="tel:9164800977" class="loc-btn-call">Call</a>
+          </div>
+        </div>
+      </div>
+      <div class="loc-card">
+        <img class="loc-img" src="https://static.wixstatic.com/media/5887cf_5a7e0e8621654530b5d3e60271537c29~mv2.png/v1/fill/w_600,h_338,al_c,q_85,enc_avif,quality_auto/5887cf_5a7e0e8621654530b5d3e60271537c29~mv2.png" alt="Elk Grove" onerror="this.style.background='#12050A';this.style.minHeight='200px'">
+        <div class="loc-body">
+          <div class="loc-num">02</div>
+          <div class="loc-name">ELK GROVE</div>
+          <div class="loc-addr">9117 E Stockton Blvd Ste 150<br>Elk Grove, CA 95624</div>
+          <div class="loc-phone"><a href="tel:9167141889">(916) 714-1889</a></div>
+          <div class="loc-btns">
+            <a href="https://taquerialoscompadreselkgrove.hrpos.heartland.us/menu" target="_blank" class="loc-btn-order">Order Online</a>
+            <a href="tel:9167141889" class="loc-btn-call">Call</a>
+          </div>
+        </div>
+      </div>
+      <div class="loc-card">
+        <img class="loc-img" src="https://static.wixstatic.com/media/5887cf_f59d86efbccd41548711fe0acac50554~mv2.png/v1/fill/w_600,h_338,al_c,q_85,enc_avif,quality_auto/5887cf_f59d86efbccd41548711fe0acac50554~mv2.png" alt="Rockingham" onerror="this.style.background='#12050A';this.style.minHeight='200px'">
+        <div class="loc-body">
+          <div class="loc-num">03</div>
+          <div class="loc-name">ROCKINGHAM DR</div>
+          <div class="loc-addr">10395 Rockingham Drive<br>Sacramento, CA</div>
+          <div class="loc-phone"><a href="tel:9167542877">(916) 754-2877</a></div>
+          <div class="loc-btns">
+            <a href="https://taquerialoscompadres3.hrpos.heartland.us/menu" target="_blank" class="loc-btn-order">Order Online</a>
+            <a href="tel:9167542877" class="loc-btn-call">Call</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU — CIRCULAR GRID -->
+<section id="menu">
+  <div class="container">
+    <div class="menu-header reveal">
+      <div class="s-eyebrow" style="text-align:center">What We Serve</div>
+      <h2 class="s-title" style="text-align:center">OUR <span style="color:var(--red)">MENU</span></h2>
+      <div class="menu-sub">Savoring the rich flavors of Mexico, one plate at a time</div>
+    </div>
+    <div class="menu-grid reveal d1">
+      <div class="menu-item">
+        <div class="menu-circle-wrap">
+          <img src="https://static.wixstatic.com/media/5887cf_d366ddd65b154fac87cf504accd06185~mv2.jpg/v1/crop/x_166,y_0,w_1107,h_1082/fill/w_500,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/307366849_606159101089169_3418334058527319571_n.jpg" alt="Burritos" loading="lazy">
+        </div>
+        <div class="menu-item-name">Burritos</div>
+        <a href="https://www.taquerialoscompadres.net/locations" target="_blank" class="menu-item-btn">Find a Location</a>
+      </div>
+      <div class="menu-item">
+        <div class="menu-circle-wrap">
+          <img src="https://static.wixstatic.com/media/5887cf_49b26148a36a4e0c920851cdd60ec9b6~mv2.jpg/v1/crop/x_166,y_0,w_1107,h_1082/fill/w_500,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/306728948_606445764393836_8386170582639866072_n.jpg" alt="Nachos" loading="lazy">
+        </div>
+        <div class="menu-item-name">Nachos</div>
+        <a href="https://www.taquerialoscompadres.net/locations" target="_blank" class="menu-item-btn">Find a Location</a>
+      </div>
+      <div class="menu-item">
+        <div class="menu-circle-wrap">
+          <img src="https://static.wixstatic.com/media/5887cf_be94ba2aa0024730909e3275d2773a74~mv2.jpg/v1/crop/x_0,y_16,w_1440,h_1407/fill/w_500,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/306976468_592876092417470_8937361142533584307_n.jpg" alt="Tacos" loading="lazy">
+        </div>
+        <div class="menu-item-name">Tacos</div>
+        <a href="https://www.taquerialoscompadres.net/locations" target="_blank" class="menu-item-btn">Find a Location</a>
+      </div>
+      <div class="menu-item">
+        <div class="menu-circle-wrap">
+          <img src="https://static.wixstatic.com/media/5887cf_f292ebf692504f2b803dd6e345b34c45~mv2.jpg/v1/crop/x_166,y_0,w_1107,h_1082/fill/w_500,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/305190138_598527865185626_4452254150471817718_n.jpg" alt="Sea Food" loading="lazy">
+        </div>
+        <div class="menu-item-name">Sea Food</div>
+        <a href="https://www.taquerialoscompadres.net/locations" target="_blank" class="menu-item-btn">Find a Location</a>
+      </div>
+      <div class="menu-item">
+        <div class="menu-circle-wrap">
+          <img src="https://static.wixstatic.com/media/5887cf_95e40c224e5b4187a0410d144cdae6b9~mv2.jpg/v1/crop/x_166,y_0,w_1107,h_1082/fill/w_500,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/307131966_595195988852147_863245914747787870_n.jpg" alt="Caldos" loading="lazy">
+        </div>
+        <div class="menu-item-name">Caldos</div>
+        <a href="https://www.taquerialoscompadres.net/locations" target="_blank" class="menu-item-btn">Find a Location</a>
+      </div>
+      <div class="menu-item">
+        <div class="menu-circle-wrap">
+          <img src="https://static.wixstatic.com/media/5887cf_9fbbfed528e749109cbabab5aae07109~mv2.jpg/v1/crop/x_0,y_16,w_1440,h_1407/fill/w_500,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/306939354_598807818490964_1259505182441877211_n.jpg" alt="Tostadas" loading="lazy">
+        </div>
+        <div class="menu-item-name">Tostadas</div>
+        <a href="https://www.taquerialoscompadres.net/locations" target="_blank" class="menu-item-btn">Find a Location</a>
+      </div>
+      <div class="menu-item">
+        <div class="menu-circle-wrap">
+          <img src="https://static.wixstatic.com/media/5887cf_84faa9b57fe8488f9d747da60cc78e12~mv2.png/v1/crop/x_0,y_12,w_1080,h_1055/fill/w_500,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Insta%202025%20El%20burrito%20Taqueria%20(1).png" alt="Molcajetes" loading="lazy">
+        </div>
+        <div class="menu-item-name">Molcajetes</div>
+        <a href="https://www.taquerialoscompadres.net/locations" target="_blank" class="menu-item-btn">Find a Location</a>
+      </div>
+      <div class="menu-item">
+        <div class="menu-circle-wrap">
+          <img src="https://static.wixstatic.com/media/5887cf_d4b644f48c3e4eaba58998b71b5ae986~mv2.jpg/v1/crop/x_0,y_128,w_1440,h_1407/fill/w_500,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/310193432_607053327666413_3863749126615824634_n.jpg" alt="Cocteles" loading="lazy">
+        </div>
+        <div class="menu-item-name">Cocteles</div>
+        <a href="https://www.taquerialoscompadres.net/locations" target="_blank" class="menu-item-btn">Find a Location</a>
+      </div>
+      <div class="menu-item">
+        <div class="menu-circle-wrap">
+          <img src="https://static.wixstatic.com/media/5887cf_607008a52115485081c5edc13426d0d1~mv2.png/v1/crop/x_0,y_12,w_1080,h_1055/fill/w_500,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Insta%202025%20El%20burrito%20Taqueria%20(2).png" alt="Plates" loading="lazy">
+        </div>
+        <div class="menu-item-name">Plates</div>
+        <a href="https://www.taquerialoscompadres.net/locations" target="_blank" class="menu-item-btn">Find a Location</a>
+      </div>
+      <div class="menu-item">
+        <div class="menu-circle-wrap">
+          <img src="https://static.wixstatic.com/media/5887cf_ac62ea17e67b4e2bb9c9926294f64489~mv2.jpg/v1/crop/x_229,y_0,w_982,h_960/fill/w_500,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/469065025_18294139825228596_2848496691088998466_n.jpg" alt="Fajitas" loading="lazy">
+        </div>
+        <div class="menu-item-name">Fajitas</div>
+        <a href="https://www.taquerialoscompadres.net/locations" target="_blank" class="menu-item-btn">Find a Location</a>
+      </div>
+      <div class="menu-item">
+        <div class="menu-circle-wrap">
+          <img src="https://static.wixstatic.com/media/5887cf_1d6b4685a18a49389cc6f87b3f338505~mv2.jpg/v1/crop/x_0,y_196,w_1440,h_1407/fill/w_500,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/308053937_598888955149517_1600521988064246430_n.jpg" alt="Drinks" loading="lazy">
+        </div>
+        <div class="menu-item-name">Drinks</div>
+        <a href="https://www.taquerialoscompadres.net/locations" target="_blank" class="menu-item-btn">Find a Location</a>
+      </div>
+      <div class="menu-item">
+        <div class="menu-circle-wrap">
+          <img src="https://static.wixstatic.com/media/5887cf_b06a4d8afe0746bb8c0156916cbcc049~mv2.jpg/v1/crop/x_0,y_163,w_1440,h_1407/fill/w_500,h_500,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/308756146_602432484795164_3704112220425234595_n.jpg" alt="Beer" loading="lazy">
+        </div>
+        <div class="menu-item-name">Beer</div>
+        <a href="https://www.taquerialoscompadres.net/locations" target="_blank" class="menu-item-btn">Find a Location</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="reveal">
+      <img class="about-img" src="https://static.wixstatic.com/media/5887cf_986407d9986544b4b7ee7049e0caa881~mv2.jpg/v1/crop/x_1,y_43,w_1439,h_1733/fill/w_600,h_720,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/5887cf_986407d9986544b4b7ee7049e0caa881~mv2.jpg" alt="Los Compadres" onerror="this.style.background='#9A0012';this.style.minHeight='300px'">
+    </div>
+    <div class="reveal d1">
+      <div class="s-eyebrow" style="color:rgba(255,255,255,0.7)">Our Story</div>
+      <h2 class="s-title" style="color:#fff">PASSION FOR <span style="opacity:0.85">AUTHENTIC FOOD</span></h2>
+      <p style="font-size:16px;color:rgba(255,255,255,0.75);line-height:1.75;margin-bottom:0">TAQUERIA LOS COMPADRES has been nestled in the SACRAMENTO area ever since 2010. This cozy establishment highlights our passion for market-fresh ingredients, honest cooking, and an enjoyable atmosphere. Our menu features a selection of Authentic Mexican Food dishes, all made in-house by our team of talented chefs. Loved by locals and traveling foodies alike.</p>
+      <div class="about-stats">
+        <div class="a-stat"><div class="a-stat-num">2010</div><div class="a-stat-lbl">Est.</div></div>
+        <div class="a-stat"><div class="a-stat-num">3</div><div class="a-stat-lbl">Locations</div></div>
+        <div class="a-stat"><div class="a-stat-num">Fresh</div><div class="a-stat-lbl">Ingredients</div></div>
+        <div class="a-stat"><div class="a-stat-num">Catering</div><div class="a-stat-lbl">Available</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HIRING -->
+<section id="hiring">
+  <div class="hiring-inner">
+    <div class="reveal">
+      <div class="s-eyebrow" style="color:rgba(255,255,255,0.7)">Careers</div>
+      <h2 class="s-title" style="color:#fff">NOW <span style="opacity:0.85">HIRING</span></h2>
+      <p style="font-size:16px;color:rgba(255,255,255,0.75);line-height:1.75;margin-bottom:40px">Join the Los Compadres family! We're looking for passionate people to join our team across all 3 Sacramento area locations. Apply below and we'll reach out.</p>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:16px 20px;display:flex;align-items:center;gap:14px">
+          <span style="font-size:24px">👨‍🍳</span><div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:2px">Cook / Cocinero</div><div style="font-size:12px;color:rgba(255,255,255,0.5)">All 3 locations · Full & Part time</div></div>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:16px 20px;display:flex;align-items:center;gap:14px">
+          <span style="font-size:24px">💰</span><div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:2px">Cashier / Cajero</div><div style="font-size:12px;color:rgba(255,255,255,0.5)">All 3 locations · Full & Part time</div></div>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:16px 20px;display:flex;align-items:center;gap:14px">
+          <span style="font-size:24px">🍽️</span><div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:2px">Waiter / Mesero</div><div style="font-size:12px;color:rgba(255,255,255,0.5)">All 3 locations</div></div>
+        </div>
+        <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:16px 20px;display:flex;align-items:center;gap:14px">
+          <span style="font-size:24px">🧼</span><div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:2px">Dishwasher / Lavaplatos</div><div style="font-size:12px;color:rgba(255,255,255,0.5)">All 3 locations</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="hiring-form reveal d2">
+      <h3>APPLY NOW</h3>
+      <div class="fr">
+        <div class="fg"><label>First Name</label><input type="text" placeholder="First name"></div>
+        <div class="fg"><label>Last Name</label><input type="text" placeholder="Last name"></div>
+      </div>
+      <div class="fg"><label>Phone</label><input type="tel" placeholder="(916) 555-0000"></div>
+      <div class="fg"><label>Preferred Location</label>
+        <select>
+          <option>2550 Fair Oaks Blvd — Sacramento</option>
+          <option>9117 E Stockton Blvd — Elk Grove</option>
+          <option>10395 Rockingham Drive — Sacramento</option>
+          <option>Any Location</option>
+        </select>
+      </div>
+      <div class="fg"><label>Position</label>
+        <select>
+          <option>Cook / Cocinero</option>
+          <option>Cashier / Cajero</option>
+          <option>Dishwasher / Lavaplatos</option>
+          <option>Waiter / Mesero</option>
+        </select>
+      </div>
+      <button class="btn-white-full" onclick="this.textContent='Application Sent! We\\'ll Contact You Soon ✓';this.style.background='#fff';this.disabled=true">Submit Application →</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid container">
+    <div class="reveal">
+      <div class="s-eyebrow">Get In Touch</div>
+      <h2 class="s-title">CONTACT <span style="color:var(--red)">US</span></h2>
+      <p class="s-desc" style="margin-bottom:36px">Questions about catering, hours, or anything else? Reach out to your nearest location.</p>
+      <div class="ci"><div class="ci-icon">📍</div><div><div class="ci-title">Fair Oaks</div><div class="ci-val">2550 Fair Oaks Blvd, Sacramento, CA 95825<br><a href="tel:9164800977">(916) 480-0977</a></div></div></div>
+      <div class="ci"><div class="ci-icon">📍</div><div><div class="ci-title">Elk Grove</div><div class="ci-val">9117 E Stockton Blvd Ste 150, Elk Grove, CA 95624<br><a href="tel:9167141889">(916) 714-1889</a></div></div></div>
+      <div class="ci"><div class="ci-icon">📍</div><div><div class="ci-title">Rockingham</div><div class="ci-val">10395 Rockingham Drive, Sacramento, CA<br><a href="tel:9167542877">(916) 754-2877</a></div></div></div>
+      <div class="socials">
+        <a href="https://www.facebook.com/TaqueriaLosCOmpadres2550" class="social" target="_blank">👍</a>
+        <a href="https://www.instagram.com/loscompadres916/" class="social" target="_blank">📸</a>
+        <a href="https://taqloscompadres.hrpos.heartland.us/menu" class="social" target="_blank">🌐</a>
+        <a href="https://www.taquerialoscompadres.net/catering" class="social" target="_blank">🍽️</a>
+      </div>
+    </div>
+    <div class="contact-form-box reveal d1">
+      <h3>SEND A MESSAGE</h3>
+      <p>Questions about catering, group orders, or anything else.</p>
+      <div class="cfg"><label>Name</label><input type="text" placeholder="Your name"></div>
+      <div class="cfg"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+      <div class="cfg"><label>Message</label><textarea placeholder="How can we help?"></textarea></div>
+      <button onclick="this.textContent='Sent! ✓';this.style.background='#0D7A28'" style="width:100%;background:var(--red);color:#fff;padding:16px;border:none;border-radius:6px;font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:all 0.25s;margin-top:8px">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="https://static.wixstatic.com/media/5887cf_730893d8e0364653af47ee9b4e68625c~mv2.png/v1/fill/w_338,h_122,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logo%20de%20los%20compadres.png" alt="Los Compadres">
+    </div>
+    <div class="footer-center">
+      <div class="footer-tagline">Authentic Mexican Food · Est. 2010 · Sacramento, CA</div>
+      <div class="footer-links">
+        <a href="#locations">Locations</a>
+        <a href="#menu">Menu</a>
+        <a href="https://taqloscompadres.hrpos.heartland.us/menu" target="_blank">Order Online</a>
+        <a href="#hiring">Now Hiring</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="footer-copy">© 2025 Taqueria Los Compadres<br>All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener("scroll",()=>{document.getElementById("nav").classList.toggle("scrolled",scrollY>60);});
+function toggleMenu(){document.getElementById("nav-links").classList.toggle("open");}
+const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add("visible")),{threshold:0.08});
+document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
