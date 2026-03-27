@@ -103,6 +103,10 @@ section{padding:100px 48px}
 .loc-btn-call:hover{border-color:var(--red);color:#fff}
 .loc-btn-dd{flex:2;background:#FF3008;color:#fff;padding:12px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center;transition:all 0.2s}
 .loc-btn-dd:hover{background:#cc2606}
+.loc-card.nearest{border-color:var(--red);box-shadow:0 0 30px rgba(200,0,26,0.5),0 24px 48px rgba(0,0,0,0.5);transform:translateY(-6px)}
+.loc-card.nearest .loc-name{color:var(--red)}
+.nearest-badge{display:none;background:var(--red);color:#fff;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:2px;text-align:center;margin-bottom:12px}
+.loc-card.nearest .nearest-badge{display:block}
 
 /* ===== MENU — CIRCULAR GRID ===== */
 #menu{background:#0E0307;padding:100px 48px}
@@ -294,7 +298,7 @@ footer{background:#060003;border-top:1px solid var(--border);padding:40px 48px}
     <div class="hero-since">EST. 2010 · SACRAMENTO, CA · 3 LOCATIONS</div>
     <div class="hero-btns">
       <a href="#locations" class="btn-red">🌮 Order Online Now</a>
-      <a href="#menu" class="btn-green">View Our Menu</a>
+      <a onclick="findNearest()" class="btn-green" style="cursor:pointer">📍 Find Nearest Location</a>
     </div>
   </div>
   <div class="scroll-hint"><div class="scroll-line"></div>Scroll</div>
@@ -321,6 +325,7 @@ footer{background:#060003;border-top:1px solid var(--border);padding:40px 48px}
       <div class="loc-card">
         <img class="loc-img" src="https://static.wixstatic.com/media/5887cf_3f7fcce3170e434086cd1998b968b614~mv2.png/v1/fill/w_600,h_338,al_c,q_85,enc_avif,quality_auto/5887cf_3f7fcce3170e434086cd1998b968b614~mv2.png" alt="Fair Oaks" onerror="this.style.background='#12050A';this.style.minHeight='200px'">
         <div class="loc-body">
+          <div class="nearest-badge">📍 Nearest to You</div>
           <div class="loc-num">01</div>
           <div class="loc-name">FAIR OAKS BLVD</div>
           <div class="loc-addr">2550 Fair Oaks Blvd<br>Sacramento, CA 95825</div>
@@ -335,6 +340,7 @@ footer{background:#060003;border-top:1px solid var(--border);padding:40px 48px}
       <div class="loc-card">
         <img class="loc-img" src="https://static.wixstatic.com/media/5887cf_5a7e0e8621654530b5d3e60271537c29~mv2.png/v1/fill/w_600,h_338,al_c,q_85,enc_avif,quality_auto/5887cf_5a7e0e8621654530b5d3e60271537c29~mv2.png" alt="Elk Grove" onerror="this.style.background='#12050A';this.style.minHeight='200px'">
         <div class="loc-body">
+          <div class="nearest-badge">📍 Nearest to You</div>
           <div class="loc-num">02</div>
           <div class="loc-name">ELK GROVE</div>
           <div class="loc-addr">9117 E Stockton Blvd Ste 150<br>Elk Grove, CA 95624</div>
@@ -349,6 +355,7 @@ footer{background:#060003;border-top:1px solid var(--border);padding:40px 48px}
       <div class="loc-card">
         <img class="loc-img" src="https://static.wixstatic.com/media/5887cf_f59d86efbccd41548711fe0acac50554~mv2.png/v1/fill/w_600,h_338,al_c,q_85,enc_avif,quality_auto/5887cf_f59d86efbccd41548711fe0acac50554~mv2.png" alt="Rockingham" onerror="this.style.background='#12050A';this.style.minHeight='200px'">
         <div class="loc-body">
+          <div class="nearest-badge">📍 Nearest to You</div>
           <div class="loc-num">03</div>
           <div class="loc-name">ROCKINGHAM DR</div>
           <div class="loc-addr">10395 Rockingham Drive<br>Sacramento, CA</div>
@@ -582,6 +589,32 @@ window.addEventListener("scroll",()=>{document.getElementById("nav").classList.t
 function toggleMenu(){document.getElementById("nav-links").classList.toggle("open");}
 const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add("visible")),{threshold:0.08});
 document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
+
+const locations=[
+  {lat:38.5676,lng:-121.4255},
+  {lat:38.4318,lng:-121.3930},
+  {lat:38.6118,lng:-121.3377}
+];
+function haversine(lat1,lng1,lat2,lng2){
+  const R=3959,dLat=(lat2-lat1)*Math.PI/180,dLng=(lng2-lng1)*Math.PI/180;
+  const a=Math.sin(dLat/2)**2+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)**2;
+  return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+}
+function findNearest(){
+  if(!navigator.geolocation){alert("Location not supported by your browser");return;}
+  navigator.geolocation.getCurrentPosition(function(pos){
+    const uLat=pos.coords.latitude,uLng=pos.coords.longitude;
+    let minDist=Infinity,minIdx=0;
+    locations.forEach((loc,i)=>{
+      const d=haversine(uLat,uLng,loc.lat,loc.lng);
+      if(d<minDist){minDist=d;minIdx=i;}
+    });
+    const cards=document.querySelectorAll(".loc-card");
+    cards.forEach(c=>c.classList.remove("nearest"));
+    cards[minIdx].classList.add("nearest");
+    cards[minIdx].scrollIntoView({behavior:"smooth",block:"center"});
+  },function(){alert("Please allow location access to find your nearest store");});
+}
 </script>
 </body>
 </html>
